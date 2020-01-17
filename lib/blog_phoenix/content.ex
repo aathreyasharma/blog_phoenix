@@ -19,7 +19,7 @@ defmodule BlogPhoenix.Content do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Post |> order_by(desc: :inserted_at) |> Repo.all
   end
 
   # def getUserNames(posts) do
