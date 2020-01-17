@@ -1,12 +1,14 @@
 defmodule BlogPhoenix.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias BlogPhoenix.Accounts.User
+  alias BlogPhoenix.Content.Post
   alias Comeonin.Bcrypt
 
   schema "users" do
     field :encrypted_password, :string
     field :username, :string
+
+    has_many :posts, BlogPhoenix.Content.Post
 
     timestamps()
   end

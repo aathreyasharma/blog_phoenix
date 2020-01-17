@@ -1,12 +1,13 @@
 defmodule BlogPhoenix.Content.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  alias BlogPhoenix.Accounts.User
 
   schema "posts" do
     field :body, :string
     field :title, :string
 
-    # has_many :comments, BlogPhoenix.Comment
+    belongs_to :user, BlogPhoenix.Accounts.User
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule BlogPhoenix.Content.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body])
+    |> cast(attrs, [:title, :body, :user_id])
     |> validate_required([:title, :body])
   end
 end

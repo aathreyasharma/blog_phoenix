@@ -33,7 +33,9 @@ defmodule BlogPhoenixWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    case Content.create_post(post_params) do
+    current_user = conn.assigns.current_user
+    newVar = %{:body => post_params["body"], :title => post_params["title"], :user_id => current_user.id}
+    case Content.create_post(newVar) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
@@ -46,6 +48,8 @@ defmodule BlogPhoenixWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Content.get_post!(id)
+    # newVar = %{}
+    # post[:username] = BlogPhoenix.Accounts.get_user!(id)
     render(conn, "show.html", post: post)
   end
 

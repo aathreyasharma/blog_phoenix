@@ -7,6 +7,7 @@ defmodule BlogPhoenix.Content do
   alias BlogPhoenix.Repo
 
   alias BlogPhoenix.Content.Post
+  alias BlogPhoenix.Accounts
 
   @doc """
   Returns the list of posts.
@@ -20,6 +21,11 @@ defmodule BlogPhoenix.Content do
   def list_posts do
     Repo.all(Post)
   end
+
+  # def getUserNames(posts) do
+  #   Enum posts, fn post ->
+      
+  # end
 
   @doc """
   Gets a single post.
@@ -50,6 +56,7 @@ defmodule BlogPhoenix.Content do
 
   """
   def create_post(attrs \\ %{}) do
+    # IO.inspect(attrs)
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
